@@ -3,15 +3,14 @@ import ejs from 'ejs'
 import axios from 'axios'
 import bodyParser from 'body-parser'
 import pg from 'pg'
+import dotenv from 'dotenv';
+dotenv.config();
+
 const port = 3500
 const app = express()
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static('public'))
-require('dotenv').config();
-
-const apiKey = process.env.API_KEY;
-
-
+const apiKey = process.env.apikey;
 const db = new pg.Client({
 	user: 'postgres',
 	host: 'localhost',
