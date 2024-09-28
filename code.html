@@ -1,0 +1,31 @@
+	<div class="card"  >
+<img src="<%= item.imageUrl %>" alt="<%= item.title %>"style="height:75px;width:48px"/>
+  <div class="card-body">
+  <div class="gr">
+
+					<h2><a href="<%= item.bookUrl %>"><%= item.title %></a></h2>
+					<p>
+						Author Name: <% item.author.forEach(auth=> { %> <%=auth.name%>,
+					</p>
+					<% } ) %>
+
+					<p>Rank: <%= item.rank %></p>
+					<p>
+						Rating: <%= item.rating %> (based on <%= item.totalRatings %>
+						ratings)
+					</p>
+					<p>Published Year: <%= item.publishedYear %></p>
+					<p>Total Editions: <%= item.totalEditions %></p>
+
+</div>
+<div class="btn_container"><form action="/notes" method="post">
+	<input type="hidden" name="book_id" value="<%= item.bookId %>" />
+	<input type="hidden" name="rank" value="<%= item.rank %>" />
+<button type="submit" class="btn btn-primary btn-sm" >Make Notes</button></form> <form action="/viewNotes" method="post">
+	<input type="hidden" name="book_id" value="<%= item.bookId %>" />
+	<input type="hidden" name="title" value="<%= item.title %>" />
+	<input type="hidden" name="cover" value="<%= item.imageUrl %>" />
+	<button type="submit" class="btn btn-secondary btn-sm">View Notes</button>
+</form></div> </div>
+
+</div>

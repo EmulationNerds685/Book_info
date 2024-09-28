@@ -1,0 +1,34 @@
+const book = {
+  "volumeInfo": {
+    "title": "Fantastic Beasts and where to Find Them",
+    "authors": ["J. K. Rowling"],
+    "publisher": "Bloomsbury Publishing",
+    "publishedDate": "2009-01-01",
+    "description": "An entertaining companion to the Harry Potter books...",
+    "industryIdentifiers": [
+      { "type": "ISBN_13", "identifier": "9781408803011" }
+    ],
+    "pageCount": 129,
+    "categories": ["Juvenile Fiction"],
+    "imageLinks": {
+      "thumbnail": "http://books.google.com/books/content?id=EcekAwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+    },
+    "previewLink": "http://books.google.co.in/books?id=EcekAwAAQBAJ&pg=PP1&dq=harrypotter&hl=&cd=1&source=gbs_api"
+  }
+};
+
+// Extracting the important details
+const importantItems = {
+  title: book.volumeInfo.title,
+  author: book.volumeInfo.authors[0],
+  publisher: book.volumeInfo.publisher,
+  publishedDate: book.volumeInfo.publishedDate,
+  description: book.volumeInfo.description,
+  isbn13: book.volumeInfo.industryIdentifiers.find(id => id.type === "ISBN_13").identifier,
+  pageCount: book.volumeInfo.pageCount,
+  categories: book.volumeInfo.categories.join(', '),
+  thumbnail: book.volumeInfo.imageLinks.thumbnail,
+  previewLink: book.volumeInfo.previewLink
+};
+
+// Now you can use `importantItems` to display the relevant data on the webpage.

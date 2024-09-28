@@ -1,0 +1,55 @@
+<%-include('partials/header.ejs')%>
+	<%if(locals.data){%>
+		<hr>
+		<h1>Books List</h1>
+		<div class="container text-center">
+			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+				<%data.forEach(book=>{%>
+
+					<div class="card" style="margin:15px;width:500px;">
+						<div class="card-body">
+							<div class="gr">
+								<img src=<%=book.volumeInfo.imageLinks.thumbnail%> alt="book_cover" class='bookcover'>
+								<h2>
+									<%= book.volumeInfo.title%></a>
+								</h2>
+								<!-- Book Author -->
+								<p><strong>Author:</strong>
+									<%=book.volumeInfo.authors%>
+								</p>
+
+								<!-- Book Publisher -->
+								<p><strong>Publisher:</strong>
+									<%=book.volumeInfo.publisher%>
+								</p>
+
+								<!-- Published Date -->
+								<p><strong>Published Date:</strong>
+									<%=book.volumeInfo.publishedDate%>
+								</p>
+
+								<!-- Description -->
+								<p><strong>Description:</strong>
+									<%=book.volumeInfo.description%>
+								</p>
+
+								<p><strong>PageCount:</strong>
+									<%=book.volumeInfo.pageCount%>
+								</p>
+
+								<p><strong>Preview Link:</strong><a href=<%=book.volumeInfo.previewLink%>>
+										<%=book.volumeInfo.previewLink%></a></p>
+							</div>
+						</div>
+					</div>
+					<%})%>
+			</div>
+		</div>
+		<%}else{%>
+			
+			<%} %>
+
+
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+/* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Playwrite DE Grund', cursive;
+}*/
+.container {
+	display: flex;
+	justify-content: center;
+	font-family: 'Radio Canada', sans-serif;
+}
+.card {
+	width: 50rem;
+	padding: 20px;
+
+	margin: 15px;
+}
+.card-title {
+	text-align: center;
+	padding: 20px;
+}
+.btn_container {
+	display: flex;
+}
+
+/*		<input
+						type="text"
+						class="form-control"
+						id="exampleFormControlInput1"
+						value="<%=book.title%>"
+					/>
+
+          		<input type="hidden" name="book_id" value="<%= book.bookId %>" />*/
