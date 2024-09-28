@@ -7,8 +7,11 @@ const port = 3500
 const app = express()
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static('public'))
+require('dotenv').config();
 
-const apikey = "AIzaSyAWQt3Zdk3WpN7a4cgKuNwQ97qpCzz3Yk8"
+const apiKey = process.env.API_KEY;
+
+
 const db = new pg.Client({
 	user: 'postgres',
 	host: 'localhost',
@@ -23,7 +26,7 @@ app.get('/', async (req, res) => {
 
 app.post('/fetch', async (req, res) => {
 	try {
-		const response = await axios.get('https://www.googleapis.com/books/v1/volumes?q=' + req.body.book + '&key=' + apikey)
+		const response = await axios.get('https://www.googleapis.com/books/v1/volumes?q=' + req.body.book + '&key=' + apiKey)
 		const result = response.data
 
 		res.render('index.ejs', { data: result.items })
