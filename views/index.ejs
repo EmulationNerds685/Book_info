@@ -9,6 +9,7 @@
 					<div class="card" style="margin:15px;width:500px;">
 						<div class="card-body">
 							<div class="gr">
+								
 								<img src=<%=book.volumeInfo.imageLinks.thumbnail%> alt="book_cover" class='bookcover'>
 								<h2>
 									<%= book.volumeInfo.title%></a>
@@ -38,18 +39,26 @@
 								</p>
 
 								<p><strong>Preview Link:</strong><a href=<%=book.volumeInfo.previewLink%>>
-										<%=book.volumeInfo.previewLink%></a></p>
-							</div>
+										<%=book.volumeInfo.previewLink%>
+									</a></p>
+									<form action="/add" method="post">
+									<input type="hidden" name="image" value="<%=book.volumeInfo.imageLinks.thumbnail%>">
+									<input type="hidden" name="title" value="<%=book.volumeInfo.title %>">
+									<input type="hidden" name="author" value="<%=book.volumeInfo.authors%>">				
+									<button type="submit" class="btn btn-outline-primary">Add</button>
+								</form>
+								</div>
 						</div>
 					</div>
+					
 					<%})%>
 			</div>
 		</div>
-		<%}else{%>
-			
-			<%} %>
+		<%}else if(locals.error){%>
 
+			<h3><%=error%></h3>
 
-</body>
+			<%}%>
+				</body>
 
-</html>
+				</html>
