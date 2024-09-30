@@ -1,64 +1,130 @@
 <%-include('partials/header.ejs')%>
-	<%if(locals.data){%>
-		<hr>
-		<h1>Books List</h1>
-		<div class="container text-center">
-			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
-				<%data.forEach(book=>{%>
 
-					<div class="card" style="margin:15px;width:500px;">
-						<div class="card-body">
-							<div class="gr">
-								
-								<img src=<%=book.volumeInfo.imageLinks.thumbnail%> alt="book_cover" class='bookcover'>
-								<h2>
-									<%= book.volumeInfo.title%></a>
-								</h2>
-								<!-- Book Author -->
-								<p><strong>Author:</strong>
-									<%=book.volumeInfo.authors%>
-								</p>
+	<body>
+		<div class="container">
+			<nav class="navbar navbar-expand-lg bg-body-tertiary">
+				<div class="container-fluid">
+					<a class="navbar-brand" href="#">RatedReads</a>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+						data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+						aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="/collection">My Collections</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#">Link</a>
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+									aria-expanded="false">
+									Dropdown
+								</a>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="#">Action</a></li>
+									<li><a class="dropdown-item" href="#">Another action</a></li>
+									<li>
+										<hr class="dropdown-divider">
+									</li>
+									<li><a class="dropdown-item" href="#">Something else here</a></li>
+								</ul>
+							</li>
 
-								<!-- Book Publisher -->
-								<p><strong>Publisher:</strong>
-									<%=book.volumeInfo.publisher%>
-								</p>
+						</ul>
 
-								<!-- Published Date -->
-								<p><strong>Published Date:</strong>
-									<%=book.volumeInfo.publishedDate%>
-								</p>
+						<form class="d-flex" for="search" method="POST" action="/fetch">
 
-								<!-- Description -->
-								<p><strong>Description:</strong>
-									<%=book.volumeInfo.description%>
-								</p>
-
-								<p><strong>PageCount:</strong>
-									<%=book.volumeInfo.pageCount%>
-								</p>
-
-								<p><strong>Preview Link:</strong><a href=<%=book.volumeInfo.previewLink%>>
-										<%=book.volumeInfo.previewLink%>
-									</a></p>
-									<form action="/add" method="post">
-									<input type="hidden" name="image" value="<%=book.volumeInfo.imageLinks.thumbnail%>">
-									<input type="hidden" name="title" value="<%=book.volumeInfo.title %>">
-									<input type="hidden" name="author" value="<%=book.volumeInfo.authors%>">				
-									<button type="submit" class="btn btn-outline-primary">Add</button>
-								</form>
-								</div>
-						</div>
+							<input class="form-control me-2" type="text" placeholder="Enter Book Name"
+								aria-label="Search" id="search" name="book" required>
+							<button class="btn btn-outline-success" type="submit">Search</button>
+						</form>
 					</div>
-					
-					<%})%>
+				</div>
+			</nav>
+			<div class="main">
+				<div class="info">
+					<h1>RatedReads</h1>
+					<p>Welcome to RateMyBook, your ultimate destination for discovering the best books to read! At
+						RateMyBook, we bring together a community of avid readers and literary enthusiasts to share
+						their
+						insights, opinions, and ratings on a vast collection of books from every genre. Whether you're a
+						fan
+						of gripping thrillers, heartwarming romances, enlightening non-fiction, or timeless classics,
+						our
+						platform is designed to help you find your next great read.
+					</p>
+				</div>
+				<img src="/images/569.jpg" alt="pic">
 			</div>
 		</div>
-		<%}else if(locals.error){%>
+		<%if(locals.data){%>
+			<hr>
+			<h1>Books List</h1>
+			<div class="container text-center">
+				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+					<%data.forEach(book=>{%>
 
-			<h3><%=error%></h3>
+						<div class="card" style="margin:15px;width:500px;">
+							<div class="card-body">
+								<div class="gr">
 
-			<%}%>
-				</body>
+									<img src=<%=book.volumeInfo.imageLinks.thumbnail%> alt="book_cover"
+									class='bookcover'>
+									<h2>
+										<%= book.volumeInfo.title%></a>
+									</h2>
+									
+									<p><strong>Author:</strong>
+										<%=book.volumeInfo.authors%>
+									</p>
 
-				</html>
+									
+									<p><strong>Publisher:</strong>
+										<%=book.volumeInfo.publisher%>
+									</p>
+
+								
+									<p><strong>Published Date:</strong>
+										<%=book.volumeInfo.publishedDate%>
+									</p>
+
+									<!-- Description -->
+									<p><strong>Description:</strong>
+										<%=book.volumeInfo.description%>
+									</p>
+
+									<p><strong>PageCount:</strong>
+										<%=book.volumeInfo.pageCount%>
+									</p>
+
+									<p><strong>Preview Link:</strong><a href=<%=book.volumeInfo.previewLink%>>
+											<%=book.volumeInfo.previewLink%>
+										</a></p>
+									<form action="/add" method="post">
+										<input type="hidden" name="image"
+											value="<%=book.volumeInfo.imageLinks.thumbnail%>">
+										<input type="hidden" name="title" value="<%=book.volumeInfo.title %>">
+										<input type="hidden" name="author" value="<%=book.volumeInfo.authors%>">
+										
+										<button type="submit" class="btn btn-outline-primary">Add</button>
+									</form>
+								</div>
+							</div>
+						</div>
+
+						<%})%>
+				</div>
+			</div>
+			<%}else if(locals.error){%>
+
+				<h3>
+					<%=error%>
+				</h3>
+
+				<%}%>
+	</body>
+
+	</html>

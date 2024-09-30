@@ -20,6 +20,18 @@ const db = new pg.Client({
 	port: 5432
 })
 db.connect()
+
+function Todaydate(){
+	const today = new Date();
+const day = today.getDate();
+const month = today.getMonth() + 1;
+const year = today.getFullYear();
+
+const dateOnly = `${day}/${month}/${year}`; 
+return dateOnly
+
+}
+
 app.get('/', async (req, res) => {
 	if(temp.length==0){
 		res.render('index.ejs')
@@ -39,9 +51,49 @@ res.send("<h1>No Books Added</h1>")
 }
 	}catch(error){
 		console.log("error")
-		//res.render('view.ejs',{error:error.message})
+		
 	}
 
+})
+app.get('/make', async (req,res)=>{
+	try{
+const id=req.query.Book_id
+const date=Todaydate()
+
+const result=await db.query('SELECT id,title,author FROM book_collection WHERE id=$1',[id])
+res.render('notes.ejs',{data:result.rows[0],
+	date:date
+})
+
+}catch(error){
+	console.log(error.message)
+	}
+})
+
+app.post('/edit',(req,res)=>{
+	console.log(req.body)
+})
+
+app.post('/save',(req,res)=>{
+	try{
+	const id=req.body.book_id
+	const notes=req.body.notes
+	const date=req.body.date
+	db.query("INSERT INTO notes(id,notes,date) VALUES($1,$2,$3)",[id,notes,date])
+	console.log("Notes Added")
+	res.redirect('/collection')
+	}catch(error){
+console.log({error:"Already added"})
+	}
+})
+app.get('/view',async(req,res)=>{
+	try{
+const id=req.query.Book_id
+const result= await db.query("SELECT title,img,author,notes,date FROM book_collection JOIN notes ON book_collection.id=notes.id WHERE book_collection.id=$1",[id])	
+res.render('notes_view.ejs',{data:result.rows[0]})
+	}catch(error){
+	console.log(error.message)
+	}
 })
 app.post('/fetch', async (req, res) => {
 	try {

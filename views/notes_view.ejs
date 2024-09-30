@@ -1,0 +1,29 @@
+<%-include('partials/header.ejs')%>
+<%if(locals.data){%>
+<div style="background-color: black; color:white;height: 110vh;">
+<div class="container-fluid" style="display:flex;align-items: center; height:100">
+    <img src=<%=data.img%>
+     alt="book_cover" 
+     style="margin-top:10px;height:300px;width:320px" >
+    <div style="margin:10px;width: 100%;">
+     <h1 style="font-size:80px;"><%=data.title%></h1>
+     <h3 style="font-size:40px;"><%=data.author%></h3>
+     <h5>Created On: <%=data.date%></h5>
+    </div>
+   </div>
+  <div class="container-fluid" style="display:flex;justify-content: center;">
+    <div class="content" style="width:80%;">
+        <h1>My Notes</h1>
+        <p class="lh-sm"><%=data.notes%></p>
+    <form action="/edit" method="post">
+        <input type="hidden" name="notes_id" value=<%=data.id%>>
+        <input type="hidden" name="notes" value=<%=data.notes%>>
+        <button type="submit" class="btn btn-info">Edit</button>
+    </form>
+    </div>
+  </div>
+  
+</div>
+<%}else{%>
+    <h1>No Notes Found!</h1>
+    <%}%>
