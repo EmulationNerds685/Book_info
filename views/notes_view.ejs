@@ -14,16 +14,21 @@
   <div class="container-fluid" style="display:flex;justify-content: center;">
     <div class="content" style="width:80%;">
         <h1>My Notes</h1>
-        <p class="lh-sm"><%=data.notes%></p>
+        <p class="lh-lg"><%=data.notes%></p>
     <form action="/edit" method="post">
         <input type="hidden" name="notes_id" value=<%=data.id%>>
         <input type="hidden" name="notes" value=<%=data.notes%>>
         <button type="submit" class="btn btn-info">Edit</button>
     </form>
+    <form action="/delete" method="post">
+        <input type="hidden" name="notes_id" value=<%=data.id%>>
+       <button type="submit" class="btn btn-info">Delete</button>
+    </form>
     </div>
   </div>
   
 </div>
+
 <%}else{%>
-    <h1>No Notes Found!</h1>
+  
     <%}%>

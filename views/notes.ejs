@@ -1,5 +1,5 @@
 <%-include("partials/header.ejs")%>
-
+<%if(locals.data){%>
 	<body>
 		<div class="container-fluid" style="text-align: center;display:flex;justify-content: center;align-items: center;background-color: cadetblue;height:100vh">
 			<div class="mb-3" style="width:100%">
@@ -21,5 +21,26 @@
 				
 			</div>
 	</body>
-
+<%}else if(locals.edit_data){%>
+	<div class="container-fluid" style="text-align: center;display:flex;justify-content: center;align-items: center;background-color: cadetblue;height:100vh">
+		<div class="mb-3" style="width:100%">
+			<div class="mb-3" style="margin:10px;">
+				<form action="/save" method="post">
+				<h1><%=edit_data.title%></h1>
+				<h4>Author: <%=edit_data.author%></h4>
+				<h4 style="position: absolute;left:25px;top:60px">Created on: <%=edit_data.date%></h4>
+		
+				<textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Write Your Notes Here..." name="notes"style="height:450px;width:100%" ><%=edit_data.notes%></textarea>
+				
+				<input type="hidden" name="book_id" value="<%=edit_data.id%>">
+				
+				
+				<button type="submit" class="btn btn-info">Save</button>
+				
+			</form>
+			</div>
+			
+		</div>
+</body>
+	<%}%>
 	</html>

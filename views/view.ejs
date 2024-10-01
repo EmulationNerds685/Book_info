@@ -19,7 +19,7 @@
 							<form action="/make" method="get">
 								<input type="hidden" name="Book_id" value=<%=book.id%>>
 							<button type="submit" class="btn btn-info">Make Notes</button>
-							
+					
 						</form>
 						<form action="/view" method="get">
 							<input type="hidden" name="Book_id" value=<%=book.id%>>
@@ -34,10 +34,32 @@
 				<%})%>
 		</div>
 	</div>
-	<%}%>
 
+  
+	<%}else if(locals.msg){%>
+	
 		
+        <div class="msg" style="height:100vh;
+		width:100%;
+		display:flex;
+		justify-content: center;
+		align-items: center;">
+		<div class="card">
+			<div class="card-body">
+			 <h1>Notes Already Created!</h1>
+			 <form action="/view" method="get">
+				<input type="hidden" name="Book_id" value=<%=msg.id%>>
+			
+			<button type="submit" class="btn btn-info">View Notes</button>
+		</form>	
+		<form action="/collection" method="get">
+	
+		<button type="submit" class="btn btn-info" style="position: absolute;top:72px;left:130px">Back</button>
+	</form>	
+			</div>
+		  </div>
+		</div>
+		<%}%>
 		
-</body>
 
 </html>
